@@ -21,4 +21,14 @@ jobs:
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/my-node-app:latest
 
+      - name: Deploy to Kubernetes via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            kubectl set image deployment/my-node-deployment my-node-container=${{ secrets.DOCKER_USERNAME }}/my-node-app:latest
+            kubectl rollout status deployment/my-node-deployment
+
     

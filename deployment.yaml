@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: my-node-container
-          image: my-node-app:latest
+          image: akshatdhub26/my-node-app:latest
           imagePullPolicy: IfNotPresent    # this will prevent the pull from docker hub if present locally
           ports:
             - containerPort: 3000
