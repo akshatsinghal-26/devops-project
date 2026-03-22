@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-node-pod
+  labels:
+    app: my-node
+spec:
+  containers:
+    - name: my-node-container
+      image: my-node-app:latest
+      imagePullPolicy: IfNotPresent    # this will prevent the pull from docker hub if present locally 
+      ports:
+        - containerPort: 3000
